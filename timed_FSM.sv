@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-// Design Name: Timed FSM Ex:Traffic Signal
+// Design Name: Timed FSM Ex: Traffic Lights
 // Engineer: kiran
 // Reference: Synthesizable Finite State Machine Design Techniques by C.E Cummings(Sunburst Designs)
 // Reference: https://verilogguide.readthedocs.io/en/latest/verilog/fsm.html
@@ -14,26 +14,26 @@ module Timed_FSM(clk,rst,N_R,N_Y,N_G);
     output logic N_R;
     output logic N_Y;
     output logic N_G;
-    
+
     logic R;
     logic Y;
     logic G;
-    
+
     typedef enum logic[1:0] {red, yellow, green} color;
     color state,nxt_state;
-    
+
     logic Scount;
-    
+
     logic [3:0]count;
-    
+
     always@(posedge clk, posedge rst)
         begin
             if(rst)
                 state <= red;
-            else 
+            else
                 state <= nxt_state;
         end
-        
+
     always@(posedge clk, posedge rst)
         begin
             if(rst | ~Scount) begin
@@ -43,12 +43,12 @@ module Timed_FSM(clk,rst,N_R,N_Y,N_G);
                     count <= count + 1;
                 end
         end
-        
+
      always@(count)
         begin
-            
+
             nxt_state <= state;
-            
+
             case(state)
                 red   : begin
                             R <= 1;
@@ -60,7 +60,7 @@ module Timed_FSM(clk,rst,N_R,N_Y,N_G);
                             end else begin
                                 nxt_state <= red;
                                 Scount    <= 1;
-                            end    
+                            end
                         end
                 yellow: begin
                             R <= 0;
@@ -72,7 +72,7 @@ module Timed_FSM(clk,rst,N_R,N_Y,N_G);
                             end else begin
                                 nxt_state <= yellow;
                                 Scount    <= 1;
-                            end  
+                            end
                         end
                 green : begin
                             R <= 0;
@@ -84,14 +84,14 @@ module Timed_FSM(clk,rst,N_R,N_Y,N_G);
                             end else begin
                                 nxt_state <= green;
                                 Scount    <= 1;
-                            end  
+                            end
                         end
              endcase
         end
-        
-        
- 
-////////////////////////////////////////////////////// Optional D-FF to eliminate Glitches       
+
+
+
+////////////////////////////////////////////////////// Optional D-FF to eliminate Glitches
      always@(posedge clk, posedge rst)
         begin
             if(rst) begin
@@ -104,6 +104,6 @@ module Timed_FSM(clk,rst,N_R,N_Y,N_G);
                 N_G <= G;
             end
         end
-        
-        
+
+
 endmodule
