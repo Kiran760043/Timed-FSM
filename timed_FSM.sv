@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-// Design Name: Timed FSM Ex: Traffic Lights
+// Design Name: Timed FSM e.g. Traffic Lights
 // Engineer: kiran
 // Reference: Synthesizable Finite State Machine Design Techniques by C.E Cummings(Sunburst Designs)
 // Reference: https://verilogguide.readthedocs.io/en/latest/verilog/fsm.html
